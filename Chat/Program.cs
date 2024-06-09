@@ -14,7 +14,14 @@ namespace Chat
         {
             UdpClient udpClient = new UdpClient(12345);
             IPEndPoint iPEndPoint = new IPEndPoint(IPAddress.Any, 0);
-            Console.WriteLine("Сервер ждет сообщение от клиента");
+            new Thread(()  => 
+                {
+                    Console.WriteLine("Сервер ждет сообщение от клиента");
+                    Console.WriteLine("Нажмите ENTER для завершения.");
+                    Console.ReadLine();
+                    Environment.Exit(0);
+                }
+                ).Start();
 
             while (true)
             {
@@ -24,7 +31,7 @@ namespace Chat
                 Message message = Message.DeserializeFromJson(messageText);
                 message.Print();
 
-                byte[] reply = Encoding.UTF8.GetBytes("Сообщение получино");
+                byte[] reply = Encoding.UTF8.GetBytes("Сообщение получено");
                 udpClient.Send(reply, reply.Length, iPEndPoint);
             }
         }
