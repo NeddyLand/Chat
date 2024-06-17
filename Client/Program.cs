@@ -27,8 +27,8 @@ namespace Client
                     messageText = Console.ReadLine();
                 }
                 while (string.IsNullOrEmpty(messageText));
-                if (messageText == "Exit")
-                    Environment.Exit(0);
+                if (messageText == "stop")
+                    break;
                 Message message = new Message() { Text = messageText, NicknameFrom = from, NicknameTo = "Server", DateTime = DateTime.Now };
                 string json = message.SerializeMessageToJson();
 
