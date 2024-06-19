@@ -1,7 +1,6 @@
 ﻿using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using Server;
 
 namespace Chat
 {
@@ -9,7 +8,6 @@ namespace Chat
     {
         static void Main(string[] args)
         {
-            UDPServer.Start();
         }
     }
 }

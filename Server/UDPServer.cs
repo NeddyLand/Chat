@@ -18,28 +18,26 @@ namespace Server
             CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
             CancellationToken token = cancelTokenSource.Token;
 
-            Task task1 = new Task(() =>
+            Task.Run(() =>
             {
                 Console.WriteLine("Сервер ждет сообщение от клиента");
-                Console.WriteLine("Нажмите ENTER для завершения.");
-                Console.ReadLine();
+                Console.WriteLine("Нажмите любую клавишу для завершения.");
+                Console.ReadKey();
                 cancelTokenSource.Cancel();
             });
-            task1.Start();
             while (!token.IsCancellationRequested)
             {
-                Task task = new Task(() =>
-            {
-                byte[] buffer = udpClient.Receive(ref iPEndPoint);
-                var messageText = Encoding.UTF8.GetString(buffer);
+                Task.Run(() =>
+                {
+                    byte[] buffer = udpClient.Receive(ref iPEndPoint);
+                    var messageText = Encoding.UTF8.GetString(buffer);
 
-                Message message = Message.DeserializeFromJson(messageText);
-                message.Print();
+                    Message message = Message.DeserializeFromJson(messageText);
+                    message.Print();
 
-                byte[] reply = Encoding.UTF8.GetBytes("Сообщение получено");
-                udpClient.Send(reply, reply.Length, iPEndPoint);
-            });
-                task.Start();
+                    byte[] reply = Encoding.UTF8.GetBytes("Сообщение получено");
+                    udpClient.Send(reply, reply.Length, iPEndPoint);
+                });
             }
             cancelTokenSource.Dispose();
         }
