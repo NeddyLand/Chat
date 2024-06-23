@@ -8,7 +8,7 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            Client client = new Client("Vladimir", "127.0.0.1");
+            Client client = new Client("Vladimir", "128.0.0.1:12345");
             client.SentMessage();
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Chat
 {
-    public class Message
+    public class Message :ICloneable
     {
         public string Text { get; set; }
         public DateTime DateTime { get; set; }
@@ -19,6 +19,10 @@ namespace Chat
         public void Print()
         {
             Console.WriteLine($"{this.DateTime} Получено сообщение: {this.Text} от {this.NicknameFrom}");
+        }
+        public object Clone()
+        {
+            return new Message();
         }
     }
 }

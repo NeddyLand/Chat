@@ -9,8 +9,22 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    static class UDPServer
+    public class UDPServer
     {
+        public string Name { get => "Server"; }
+        public Dictionary<string, IPEndPoint> Users { get; private set; }
+        public void Register(string username, IPEndPoint iPEndPoint)
+        {
+            if (Users == null)
+            {
+                Users = new Dictionary<string, IPEndPoint>();
+            }
+            Users.Add(username, iPEndPoint);
+        }
+        public void Delete(string username)
+        {
+            Users.Remove(username);
+        }
         public static void Start()
         {
             UdpClient udpClient = new UdpClient(12345);
