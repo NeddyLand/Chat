@@ -11,5 +11,8 @@ namespace DBServer
         public int MessageId { get; set; }
         public string Text {  get; set; }
         public DateTime DateSend { get; set; }
+        public bool IsSent { get; set; }
+        public int IDUserTo { get; set; }
+        public int IDUserFrom { get; set; }
     }
 }
