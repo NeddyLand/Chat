@@ -1,5 +1,4 @@
-﻿using Chat;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -7,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Metadata;
+using MessageLib;
 
 namespace Client
 {
@@ -43,7 +43,7 @@ namespace Client
                 while (string.IsNullOrEmpty(messageText));
                 if (messageText == "Exit")
                     Environment.Exit(0);
-                Message message = new Message() { Text = messageText, NicknameFrom = _user, NicknameTo = nicknameTo, DateTime = DateTime.Now };
+                LMessage message = new LMessage() { Text = messageText, NicknameFrom = _user, NicknameTo = nicknameTo, DateTime = DateTime.Now };
                 string json = message.SerializeMessageToJson();
 
                 byte[] data = Encoding.UTF8.GetBytes(json);

@@ -1,11 +1,11 @@
-﻿using Chat;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using MessageLib;
 
 namespace Server
 {
@@ -46,7 +46,7 @@ namespace Server
                     byte[] buffer = udpClient.Receive(ref iPEndPoint);
                     var messageText = Encoding.UTF8.GetString(buffer);
 
-                    Message message = Message.DeserializeFromJson(messageText);
+                    LMessage message = LMessage.DeserializeFromJson(messageText);
                     message.Print();
 
                     byte[] reply = Encoding.UTF8.GetBytes("Сообщение получено");

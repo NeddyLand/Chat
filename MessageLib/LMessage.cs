@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
-namespace Chat
+namespace MessageLib
 {
-    public class Message :ICloneable
+    public class LMessage : ICloneable
     {
         public string Text { get; set; }
         public DateTime DateTime { get; set; }
@@ -15,14 +10,14 @@ namespace Chat
         public string NicknameTo { get; set; }
 
         public string SerializeMessageToJson() => JsonSerializer.Serialize(this);
-        public static Message? DeserializeFromJson(string message) => JsonSerializer.Deserialize<Message>(message);
+        public static LMessage? DeserializeFromJson(string message) => JsonSerializer.Deserialize<LMessage>(message);
         public void Print()
         {
             Console.WriteLine($"{this.DateTime} Получено сообщение: {this.Text} от {this.NicknameFrom}");
         }
         public object Clone()
         {
-            return new Message();
+            return new LMessage();
         }
     }
 }
